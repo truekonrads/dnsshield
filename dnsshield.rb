@@ -29,7 +29,7 @@ RubyDNS::run_server(:listen => INTERFACES) do
         # drop a specific, invalid response
         if (  r.answer.length>0 and 
               r.answer[0][2].respond_to?(:address) and
-              r.answer[0][2].address.to_s=="0.0.0.0") then 
+              r.answer[0][2].address.to_s==opts[:filteraddress]) then 
            transaction.fail!(:NXDomain)
         else
           transaction.response.merge!(r)
